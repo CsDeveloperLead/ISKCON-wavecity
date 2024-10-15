@@ -1,5 +1,5 @@
 
-import Navbar from "@/components/Navbar";
+import Navbar from "@/Components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 const data = [

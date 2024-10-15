@@ -3,8 +3,8 @@
 import { useParams } from "next/navigation"; // Import useParams from next/navigation
 import React from "react";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import ProgressBar from "@/components/ProgressBar";
+import Navbar from "@/Components/Navbar";
+import ProgressBar from "@/Components/ProgressBar";
 import { FaLocationDot } from "react-icons/fa6";
 
 const data = [
