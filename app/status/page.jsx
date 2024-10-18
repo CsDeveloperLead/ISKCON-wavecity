@@ -1,9 +1,14 @@
 "use client"; // Ensure this component is treated as a client component
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import orders from "../../orders.json";
 
-export default function PaymentSuccess() {
+// Define a Loading component to handle the Suspense fallback
+const Loading = () => {
+  return <p>Loading...</p>;
+};
+
+const PaymentSuccessComponent = () => {
   const searchParams = useSearchParams();
   const order_id = searchParams.get('order_id'); // Get the order_id from query params
   const [orderDetails, setOrderDetails] = useState(null);
@@ -43,7 +48,7 @@ export default function PaymentSuccess() {
             </li>
             <li>
               <strong>Amount:</strong> ₹{(orderDetails.amount / 100).toFixed(2)}
-            </li>{" "} 
+            </li>{" "}
             {/* Convert from paise to INR */}
             <li>
               <strong>Currency:</strong> {orderDetails.currency}
@@ -68,5 +73,14 @@ export default function PaymentSuccess() {
         </button>
       </div>
     </div>
+  );
+};
+
+// Wrap the component with Suspense
+export default function PaymentSuccess() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <PaymentSuccessComponent />
+    </Suspense>
   );
 }
