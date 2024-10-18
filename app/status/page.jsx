@@ -2,7 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, Suspense } from "react";
 import orders from "../../orders.json";
-import Cart from "../../Components/Cart";
+import Cart from "../Components/Cart";
 
 // Define a Loading component to handle the Suspense fallback
 const Loading = () => {
