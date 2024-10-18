@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useCart } from "../contexts/CartContext";
 
 const CartModal = () => {
-  const { cartItems, removeFromCart, closeCart, removeAllFromCart } = useCart();
+  const { cartItems} = useCart();
   const [totalCount, setTotalCount] = useState(0); // Local state for total count
   const [groupedItemsArray, setGroupedItemsArray] = useState([]); // Local state for grouped items
 

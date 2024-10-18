@@ -2,7 +2,6 @@
 
 // import Link from "next/link";
 import { useState} from "react";
-
 import { useParams } from "next/navigation";
 import React from "react";
 import Image from "next/image";
@@ -320,6 +319,7 @@ const data = [
 ];
 
 const CardDetails = () => {
+  const [addedDonations, setAddedDonations] = useState([]);
   const params = useParams();
   const { id } = params;
   const { addToCart, removeFromCart } = useCart();
@@ -331,7 +331,7 @@ const CardDetails = () => {
   if (!card) {
     return <div>Card not found</div>;
   }
-  const [addedDonations, setAddedDonations] = useState([]);
+
 
   const handleAddDonation = (donation) => {
     addToCart(donation);
