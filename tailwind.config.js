@@ -29,8 +29,12 @@ module.exports = {
         'gradient-end': '#C68C34',   // Ending color of the gradient
       },
       fontFamily: {
-        'oc-pajaro': ['"OC Pajaro Regular"', 'sans-serif'], // Define your custom font
+        'oc-pajaro': ['"OC Pajaro Regular"', 'sans-serif'],
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'], // Define your custom font
       },
+      colors:{
+        'main': '#4552e3',
+      }
 
     },
   },
