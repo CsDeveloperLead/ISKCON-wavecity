@@ -14,7 +14,7 @@ const Banner = () => {
           ISKCON Vrindavan cordially invites you for the celebration of the
           fiftieth anniversary of the Grand Opening of the Sri Sri
           Krishna-Balarama Mandir on Rama Navami, April 6<sup>th</sup>, 2025.
-        </div>
+        </p>
         <div className="mt-6 flex items-center">
           <div className="bg-white rounded-full flex items-center gap-2 px-4 py-2">
             <svg
@@ -77,8 +77,8 @@ const Banner = () => {
                 </svg>
               </div>
               <div>
-                <p className="font-medium">50<sup>th</sup> Grand Opening</div>
-                <p className="text-sm text-gray-500">1<sup>st</sup> April – 6<sup>th</sup> April 2025</div>
+                <p className="font-medium">50<sup>th</sup> Grand Opening</p>
+                <p className="text-sm text-gray-500">1<sup>st</sup> April – 6<sup>th</sup> April 2025</p>
               </div>
             </li>
 
@@ -100,8 +100,8 @@ const Banner = () => {
                 </svg>
               </div>
               <div>
-                <p className="font-medium">Karttika Vraja Parikrama</div>
-                <p className="text-sm text-gray-500">18<sup>th</sup> Oct – 13<sup>th</sup> Nov 2024</div>
+                <p className="font-medium">Karttika Vraja Parikrama</p>
+                <p className="text-sm text-gray-500">18<sup>th</sup> Oct – 13<sup>th</sup> Nov 2024</p>
               </div>
             </li>
 
@@ -123,8 +123,8 @@ const Banner = () => {
                 </svg>
               </div>
               <div>
-                <p className="font-medium">84 Kos Vraj Mandal Parikrama</div>
-                <p className="text-sm text-gray-500">16<sup>th</sup> Oct – 15<sup>th</sup> Nov 2024</div>
+                <p className="font-medium">84 Kos Vraj Mandal Parikrama</p>
+                <p className="text-sm text-gray-500">16<sup>th</sup> Oct – 15<sup>th</sup> Nov 2024</p>
               </div>
             </li>
 
@@ -146,8 +146,8 @@ const Banner = () => {
                 </svg>
               </div>
               <div>
-                <p className="font-medium">Rama Ekadasi</div>
-                <p className="text-sm text-gray-500">28<sup>th</sup> October 2024 (Monday)</div>
+                <p className="font-medium">Rama Ekadasi</p>
+                <p className="text-sm text-gray-500">28<sup>th</sup> October 2024 (Monday)</p>
               </div>
             </li>
           </ul>

@@ -6,7 +6,7 @@ import Cart from "../../Components/Cart";
 
 // Define a Loading component to handle the Suspense fallback
 const Loading = () => {
-  return <div>Loading...</div>;
+  return <p>Loading...</p>;
 };
 
 const PaymentSuccessComponent = () => {
@@ -29,7 +29,7 @@ const PaymentSuccessComponent = () => {
   console.log("Order ID: ", order_id);
 
   if (!orderDetails) {
-    return <div>Loading...</div>; // Show loading state while fetching data
+    return <p>Loading...</p>; // Show loading state while fetching data
   }
 
   return (
@@ -38,7 +38,7 @@ const PaymentSuccessComponent = () => {
         <h1 className="text-3xl font-bold text-green-600 mb-4">
           Payment Successful
         </h1>
-        <p className="text-gray-700 mb-6">Thank you for your payment!</div>
+        <p className="text-gray-700 mb-6">Thank you for your payment!</p>
 
         {/* Payment Information */}
         <div className="border-t border-gray-300 pt-4 mt-4">
