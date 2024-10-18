@@ -6,7 +6,7 @@ import Image from "next/image";
 import MainNavbar from "../../Components/MainNavbar";
 // import ProgressBar from "../../Components/ProgressBar";
 // import { FaLocationDot } from "react-icons/fa6";
-import Link from "next/link";
+// import Link from "next/link";
 import Footer from "../../Components/Footer";
 
 const data = [

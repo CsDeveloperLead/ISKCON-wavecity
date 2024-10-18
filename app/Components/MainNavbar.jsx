@@ -125,7 +125,7 @@ const MainNavbar = () => {
   const closeModal = () => setIsOpen(false);
 
 //   for active links of navbar
-const [activeLink, setActiveLink] = useState('/'); // Set default active link
+// const [,activeLink setActiveLink] = useState('/'); // Set default active link
 
 const handleLinkClick = (link) => {
   setActiveLink(link); // Update active link on click
