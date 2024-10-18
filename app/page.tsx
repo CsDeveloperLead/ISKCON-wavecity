@@ -6,7 +6,7 @@ import Banner from "./Components/Banner";
 import ServiceCarousel from "./Components/ServiceCarousel";
 import DonateUs from "./Components/DonateUs";
 import Image from "next/image";
-
+import { CartProvider } from './contexts/CartContext';
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["200", "400", "600", "800"], // Customize weights as needed
@@ -16,6 +16,7 @@ const jakarta = Plus_Jakarta_Sans({
 
 export default function Home() {
   return (
+    <CartProvider>
     <div className={jakarta.className}>
       <div className="bg-[#f9f9fd]">
         <div className="mx-28">
@@ -48,5 +49,6 @@ export default function Home() {
         <Footer />
       </div>
     </div>
+    </CartProvider>
   );
 }

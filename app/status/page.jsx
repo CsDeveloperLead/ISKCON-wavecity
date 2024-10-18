@@ -2,10 +2,11 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, Suspense } from "react";
 import orders from "../../orders.json";
+import Cart from "../../Components/Cart";
 
 // Define a Loading component to handle the Suspense fallback
 const Loading = () => {
-  return <p>Loading...</p>;
+  return <div>Loading...</div>;
 };
 
 const PaymentSuccessComponent = () => {
@@ -28,7 +29,7 @@ const PaymentSuccessComponent = () => {
   console.log("Order ID: ", order_id);
 
   if (!orderDetails) {
-    return <p>Loading...</p>; // Show loading state while fetching data
+    return <div>Loading...</div>; // Show loading state while fetching data
   }
 
   return (
@@ -37,7 +38,7 @@ const PaymentSuccessComponent = () => {
         <h1 className="text-3xl font-bold text-green-600 mb-4">
           Payment Successful
         </h1>
-        <p className="text-gray-700 mb-6">Thank you for your payment!</p>
+        <p className="text-gray-700 mb-6">Thank you for your payment!</div>
 
         {/* Payment Information */}
         <div className="border-t border-gray-300 pt-4 mt-4">
@@ -71,6 +72,9 @@ const PaymentSuccessComponent = () => {
         >
           Download Receipt
         </button>
+      </div>
+      <div>
+        <Cart />
       </div>
     </div>
   );

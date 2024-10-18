@@ -87,7 +87,7 @@ const Card = ({ title, image, id }) => {
     <h3 className="text-md text-center text-gray-600 font-bold mb-2">
       {title}
     </h3>
-    {/* <p className="text-gray-500 h-[100px] text-sm text-center">{description}</p> */}
+    {/* <p className="text-gray-500 h-[100px] text-sm text-center">{description}</div> */}
 
     <button className="bg-main text-white text-sm font-semibold w-[90%] py-2 rounded-md my-4">
       <Link href={`/donation/${id}`}>
@@ -110,7 +110,7 @@ const Page = () => {
             <div className="w-full md:w-[50%] px-4 md:pl-20 flex flex-col gap-6 ">
               <p className="gradient-text2 text-4xl mt-6 md:mt-0 font-extrabold ">
                 Iscon Wavecity Gaziabad
-              </p>
+              </div>
               <h1 className="text-4xl md:text-7xl text-center md:text-start leading-6 md:leading-10 font-bold text-[#665f5f]">
                 Donate to construct
               </h1>

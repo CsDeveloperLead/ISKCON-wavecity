@@ -14,7 +14,7 @@ const Banner = () => {
           ISKCON Vrindavan cordially invites you for the celebration of the
           fiftieth anniversary of the Grand Opening of the Sri Sri
           Krishna-Balarama Mandir on Rama Navami, April 6<sup>th</sup>, 2025.
-        </p>
+        </div>
         <div className="mt-6 flex items-center">
           <div className="bg-white rounded-full flex items-center gap-2 px-4 py-2">
             <svg
@@ -31,7 +31,7 @@ const Banner = () => {
                 d="M8 7V3m8 4V3m-6 8h6m4 0h.01M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z"
               />
             </svg>
-            <p> 1<sup>st</sup> April – 6<sup>th</sup> April 2025</p>
+            <div> 1<sup>st</sup> April – 6<sup>th</sup> April 2025</div>
           </div>
         </div>
         <button className="mt-6 w-[180px] px-2 py-2 bg-main text-white rounded-full hover:bg-main">
@@ -77,8 +77,8 @@ const Banner = () => {
                 </svg>
               </div>
               <div>
-                <p className="font-medium">50<sup>th</sup> Grand Opening</p>
-                <p className="text-sm text-gray-500">1<sup>st</sup> April – 6<sup>th</sup> April 2025</p>
+                <p className="font-medium">50<sup>th</sup> Grand Opening</div>
+                <p className="text-sm text-gray-500">1<sup>st</sup> April – 6<sup>th</sup> April 2025</div>
               </div>
             </li>
 
@@ -100,8 +100,8 @@ const Banner = () => {
                 </svg>
               </div>
               <div>
-                <p className="font-medium">Karttika Vraja Parikrama</p>
-                <p className="text-sm text-gray-500">18<sup>th</sup> Oct – 13<sup>th</sup> Nov 2024</p>
+                <p className="font-medium">Karttika Vraja Parikrama</div>
+                <p className="text-sm text-gray-500">18<sup>th</sup> Oct – 13<sup>th</sup> Nov 2024</div>
               </div>
             </li>
 
@@ -123,8 +123,8 @@ const Banner = () => {
                 </svg>
               </div>
               <div>
-                <p className="font-medium">84 Kos Vraj Mandal Parikrama</p>
-                <p className="text-sm text-gray-500">16<sup>th</sup> Oct – 15<sup>th</sup> Nov 2024</p>
+                <p className="font-medium">84 Kos Vraj Mandal Parikrama</div>
+                <p className="text-sm text-gray-500">16<sup>th</sup> Oct – 15<sup>th</sup> Nov 2024</div>
               </div>
             </li>
 
@@ -146,8 +146,8 @@ const Banner = () => {
                 </svg>
               </div>
               <div>
-                <p className="font-medium">Rama Ekadasi</p>
-                <p className="text-sm text-gray-500">28<sup>th</sup> October 2024 (Monday)</p>
+                <p className="font-medium">Rama Ekadasi</div>
+                <p className="text-sm text-gray-500">28<sup>th</sup> October 2024 (Monday)</div>
               </div>
             </li>
           </ul>

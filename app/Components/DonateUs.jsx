@@ -50,7 +50,7 @@ const data = [
       <h3 className="text-md text-center text-gray-600 font-bold mb-2">
         {title}
       </h3>
-      {/* <p className="text-gray-500 h-[100px] text-sm text-center">{description}</p> */}
+      {/* <p className="text-gray-500 h-[100px] text-sm text-center">{description}</div> */}
   
       <button className="bg-main text-white text-sm font-semibold w-[90%] py-2 rounded-md my-4">
         <Link href={`/donation/${id}`}>

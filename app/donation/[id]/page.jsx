@@ -1,13 +1,16 @@
 "use client";
 
-import { useParams } from "next/navigation"; // Import useParams from next/navigation
+// import Link from "next/link";
+import { useState} from "react";
+
+import { useParams } from "next/navigation";
 import React from "react";
 import Image from "next/image";
 import MainNavbar from "../../Components/MainNavbar";
-// import ProgressBar from "../../Components/ProgressBar";
-// import { FaLocationDot } from "react-icons/fa6";
-// import Link from "next/link";
+
 import Footer from "../../Components/Footer";
+import { useCart } from "../../contexts/CartContext";
+import { FaTrash } from 'react-icons/fa';
 
 const data = [
   {
@@ -17,7 +20,28 @@ const data = [
       "Taking part in these festivals means a step forward for our self-realization",
     desc2:
       "(Festival Lectures by Srila Prabhupada Quoted in London on July 13, 1972)",
-    image: "/images/navbg.png", // Example image URL, change as needed
+    image: "/images/navbg.png",
+    services: [
+      {
+        service_name: "Temple Construction",
+        donation_types: [
+          { id: 1, type: "5 CFT Sand", price: 300 },
+          { id: 2, type: "10 CFT Sand", price: 500 },
+          { id: 3, type: "20 CFT Sand", price: 1000 },
+          { id: 4, type: "1 Bag Cement", price: 400 },
+          { id: 5, type: "100 Bricks", price: 750 },
+          { id: 6, type: "4 Bag Cement", price: 1600 },
+          { id: 7, type: "300 Bricks", price: 2100 },
+          { id: 8, type: "500 Bricks", price: 3500 },
+          { id: 9, type: "10 Bag Cement", price: 4000 },
+          { id: 10, type: "100 Kg TMT Saria", price: 5100 },
+          { id: 11, type: "1 Sq. Foot Area", price: 9999 },
+          { id: 12, type: "Half Sq. Foot Area", price: 4999 },
+          { id: 13, type: "1000 Bricks", price: 7000 },
+          { id: 14, type: "2 Sq. Feet Area", price: 19999 },
+        ],
+      }
+    ],
   },
   {
     id: 2,
@@ -26,8 +50,46 @@ const data = [
       "Taking part in these festivals means a step forward for our self-realization",
     desc2:
       "(Festival Lectures by Srila Prabhupada Quoted in London on July 13, 1972)",
-    image: "/images/navbg.png", // Example image URL, change as needed
+    image: "/images/navbg.png",
+    services: [
+      {
+        service_name: "Sadhu Bhojan",
+        donation_types: [
+          {
+            id: 15,
+            type: "Bhojan For 1 Sadhu",
+            price: 100,
+          },
+          {
+            id: 16,
+            type: "Bhojan For 5 Sadhus",
+            price: 500,
+          },
+          {
+            id: 17,
+            type: "Bhojan For 10 Sadhus",
+            price: 1000,
+          },
+          {
+            id: 18,
+            type: "Bhojan For 20 Sadhus",
+            price: 2000,
+          },
+          {
+            id: 19,
+            type: "Bhojan For 50 Sadhus",
+            price: 5000,
+          },
+          {
+            id: 20,
+            type: "1 Day Sadhu Bhojan Seva",
+            price: 11000,
+          },
+        ],
+      },
+    ],
   },
+
   {
     id: 3,
     title: "Food For Life",
@@ -36,6 +98,43 @@ const data = [
     desc2:
       "(Festival Lectures by Srila Prabhupada Quoted in London on July 13, 1972)",
     image: "/images/navbg.png", // Example image URL, change as needed
+    services: [
+      {
+        service_name: "Food Distribution",
+        donation_types: [
+          {
+            id: 21,
+            type: "5 Meals",
+            price: 250,
+          },
+          {
+            id: 22,
+            type: "10 Meals",
+            price: 500,
+          },
+          {
+            id: 23,
+            type: "20 Meals",
+            price: 1000,
+          },
+          {
+            id: 24,
+            type: "50 Meals",
+            price: 2500,
+          },
+          {
+            id: 25,
+            type: "100 Meals",
+            price: 5000,
+          },
+          {
+            id: 26,
+            type: "250 Meals",
+            price: 12500,
+          },
+        ],
+      },
+    ],
   },
   {
     id: 4,
@@ -45,6 +144,53 @@ const data = [
     desc2:
       "(Festival Lectures by Srila Prabhupada Quoted in London on July 13, 1972)",
     image: "/images/navbg.png", // Example image URL, change as needed
+    services: [
+      {
+        service_name: "Vigrah Seva",
+        donation_types: [
+          {
+            id: 27,
+            type: "Vaikalika Bhoga",
+            price: 1000,
+          },
+          {
+            id: 28,
+            type: "Sakalika Bhoga",
+            price: 1100,
+          },
+          {
+            id: 29,
+            type: "Balya Bhoga",
+            price: 1500,
+          },
+          {
+            id: 30,
+            type: "Shayana Bhoga",
+            price: 2000,
+          },
+          {
+            id: 31,
+            type: "Sandhaya Bhoga",
+            price: 2500,
+          },
+          {
+            id: 32,
+            type: "Raja Bhoga",
+            price: 3500,
+          },
+          {
+            id: 33,
+            type: "Pushpa Seva",
+            price: 5100,
+          },
+          {
+            id: 34,
+            type: "All Seva of the Day",
+            price: 17000,
+          },
+        ],
+      },
+    ],
   },
   {
     id: 5,
@@ -54,6 +200,58 @@ const data = [
     desc2:
       "(Festival Lectures by Srila Prabhupada Quoted in London on July 13, 1972)",
     image: "/images/navbg.png", // Example image URL, change as needed
+    services: [
+      {
+        service_name: "Feed A Cow",
+        donation_types: [
+          {
+            id: 35,
+            type: "5 Days",
+            price: 500,
+          },
+          {
+            id: 36,
+            type: "10 Days",
+            price: 1000,
+          },
+          {
+            id: 37,
+            type: "15 Days",
+            price: 1500,
+          },
+          {
+            id: 38,
+            type: "1 Month",
+            price: 3000,
+          },
+        ],
+      },
+      {
+        service_name: "Care For Cows",
+        donation_types: [
+          {
+            id: 39,
+            type: "Medicine for 1 Cow",
+            price: 550,
+          },
+          {
+            id: 40,
+            type: "Medicine for 2 Cow",
+            price: 1100,
+          },
+          {
+            id: 41,
+            type: "Medicine for 5 Cow",
+            price: 2700,
+          },
+          {
+            id: 42,
+            type: "Medicine for 10 Cow",
+            price: 5500,
+          },
+        ],
+      },
+    ],
   },
   {
     id: 6,
@@ -63,6 +261,43 @@ const data = [
     desc2:
       "(Festival Lectures by Srila Prabhupada Quoted in London on July 13, 1972)",
     image: "/images/navbg.png", // Example image URL, change as needed
+    services: [
+      {
+        service_name: "Feast Sponsorship",
+        donation_types: [
+          {
+            id: 43,
+            type: "2 Drum Khichdi for 100 People",
+            price: 3100,
+          },
+          {
+            id: 44,
+            type: "2 Drum Kheer for 100 People",
+            price: 5100,
+          },
+          {
+            id: 45,
+            type: "2 Drum Rajma Rice for 100 People",
+            price: 6500,
+          },
+          {
+            id: 46,
+            type: "Bhojan for 150 Sadhus",
+            price: 11000,
+          },
+          {
+            id: 47,
+            type: "Sunday Love Feast",
+            price: 21000,
+          },
+          {
+            id: 48,
+            type: "Festival Feast",
+            price: 51000,
+          },
+        ],
+      },
+    ],
   },
   {
     id: 7,
@@ -85,10 +320,9 @@ const data = [
 ];
 
 const CardDetails = () => {
-  const params = useParams(); // Get the dynamic id using useParams
-  const { id } = params; // Extract the id from params
-  // const raisedAmount = 80050; // You can update this dynamically
-  // const goalAmount = 90000; // Set your goal here
+  const params = useParams();
+  const { id } = params;
+  const { addToCart, removeFromCart } = useCart();
 
   // Find the card by id
   const card = data.find((item) => item.id === Number(id));
@@ -97,145 +331,23 @@ const CardDetails = () => {
   if (!card) {
     return <div>Card not found</div>;
   }
+  const [addedDonations, setAddedDonations] = useState([]);
+
+  const handleAddDonation = (donation) => {
+    addToCart(donation);
+    setAddedDonations((prev) => [...prev, donation.id]); // Add the donation ID to the state
+  };
+
+  const handleRemoveDonation = (donationId) => {
+    removeFromCart(donationId);
+    setAddedDonations((prev) => prev.filter((id) => id !== donationId)); // Remove the donation ID from the state
+  };
 
   return (
     <div className="bg-[#f9f9fd]">
       <div className="mx-28">
         <MainNavbar />
       </div>
-      {/* another design set */}
-      {/* <div className="w-full bg-white ">
-        <div className="relative">
-          <div className="w-full flex-col gap-4 md:gap-8 flex items-center justify-center">
-            <p className="gradient-text2 text-4xl mt-10 md:mt-32 font-extrabold ">
-              Iscon Wavecity Gaziabad
-            </p>
-            <h1 className="text-[#665f5f] text-4xl md:text-7xl text-center font-bold leading-8 md:leading-10">
-              {card.title}{" "}
-            </h1>
-            <p className="text-[#665f5f] text-xl text-center">
-              {card.description}
-            </p>
-          </div>
-
-          <div className="w-full md:w-[50%] mt-[20px] flex justify-center items-center ">
-            <div className="absolute right-0">
-              <Image
-                src="/images/bgdonation.png"
-                width={1000}
-                height={400}
-                alt="temple"
-                className="opacity-40"
-              />
-            </div>
-          </div>
-          <div className="w-full flex flex-col md:flex-row items-center md:items-start justify-between px-4 md:px-20 mt-8 md:mt-28">
-            <div className="w-full md:w-[70%] flex flex-col gap-4">
-              <div className="w-full h-[400px] rounded-3xl bg-[#c4c4c4] z-20">
-              </div>
-              <div className="w-full">
-                <ProgressBar raised={raisedAmount} goal={goalAmount} />
-              </div>
-              <div className="flex flex-col gap-4">
-                <h1 className="text-[#c24f20] text-xl md:text-4xl text-center md:text-start font-bold">
-                  There are many variations of passages of available but
-                  majority have alteration
-                </h1>
-                <p className="text-[#868388] text-base md:text-lg text-center md:text-start md:leading-8">
-                  Neque porro est qui dolorem ipsum quia quaed inventor
-                  veritatis et quasi architecto beatae vitae dicta sunt
-                  explicabo. Aelltes port lacus quis enim var sed efficitur
-                  turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply
-                  dummy text of the printing and typesetting industry.
-                </p>
-                <p className="text-[#868388] text-base md:text-lg text-center md:text-start md:leading-8">
-                  When an unknown printer took a galley of type and scrambled it
-                  to make a type specimen book. It has survived not only five
-                  centuries, but also the leap into electronic typesetting,
-                  remaining
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 mt-4 mb-20">
-                <h1 className="text-[#c24f20] text-xl md:text-4xl text-center md:text-start font-bold">
-                  Why Donate with clean heart
-                </h1>
-                <p className="text-[#868388] text-base md:text-lg text-center md:text-start md:leading-8">
-                  Neque porro est qui dolorem ipsum quia quaed inventor
-                  veritatis et quasi architecto beatae vitae dicta sunt
-                  explicabo. Aelltes port lacus quis enim var sed efficitur
-                  turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply
-                  dummy text of the printing and typesetting industry.
-                </p>
-              </div>
-            </div>
-            <div className="w-[95%] md:w-[25%] flex flex-col items-center gap-10">
-              <div className="bg-[#efece7] rounded-3xl p-6 w-full z-50">
-                <h3 className="text-xl md:text-2xl font-bold text-[#665f5f] text-center">
-                  {card.title} - Wave City, Ghaziabad
-                </h3>
-                <p className="border-b border-[#D7D3CB] my-3"></p>
-                <div className="flex flex-col gap-2 ">
-                  <p className="flex gap-2 items-center text-[#665f5f] text-base md:text-xl">
-                    <span className="text-red-500">
-                      <FaLocationDot size={20} />
-                    </span>{" "}
-                    <span className="text-base md:text-xl font-bold">
-                      Address :{" "}
-                    </span>
-                    {card.address}
-                  </p>
-                  <p className="flex gap-2 items-center text-[#665f5f] text-base md:text-xl">
-                    <span className="text-red-500">
-                      <FaLocationDot size={20} />
-                    </span>{" "}
-                    <span className="text-base md:text-xl font-bold">
-                      Address :{" "}
-                    </span>
-                    {card.address}
-                  </p>
-                  <p className="flex gap-2 items-center text-[#665f5f] text-base md:text-xl">
-                    <span className="text-red-500">
-                      <FaLocationDot size={20} />
-                    </span>{" "}
-                    <span className="text-base md:text-xl font-bold">
-                      Address :{" "}
-                    </span>
-                    {card.address}
-                  </p>
-                </div>
-              </div>
-              <div className="bg-[#efece7] rounded-3xl p-6 w-full mb-10 md:mb-0  z-50">
-                <h3 className="text-xl md:text-2xl font-bold text-[#665f5f] text-center">
-                  Other Donations
-                </h3>
-                <p className="border-b border-[#D7D3CB] my-3"></p>
-                <div className="flex flex-col gap-2  ">
-                  <p className="flex gap-2 items-center text-[#665f5f] text-base md:text-xl">
-                    {" "}
-                    {card.address}
-                  </p>
-                  <p className="flex gap-2 items-center text-[#665f5f] text-base md:text-xl">
-                    {" "}
-                    {card.address}
-                  </p>
-                  <p className="flex gap-2 items-center text-[#665f5f] text-base md:text-xl">
-                    {" "}
-                    {card.address}
-                  </p>
-                </div>
-              </div>
-              <button className="bg-gradient-to-r from-[#873C28] to-[#CD531F] text-white w-[90%] py-2 rounded-3xl ">
-        <Link href={`/payment`}>
-          Donate Now 
-        </Link>
-      </button>
-      
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* new design set */}
 
       <div className="mx-28 my-4">
         <div className="flex justify-between gap-6 ">
@@ -326,6 +438,61 @@ const CardDetails = () => {
             />
           </div>
         </div>
+      </div>
+      <div>
+      <div className="mx-28 py-6">
+      <div className="grid gap-10">
+        {card.services.map((service, serviceIndex) => (
+          <div key={serviceIndex}>
+            <h3 className="text-3xl font-bold text-[#204289] my-8">
+              {service.service_name}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {service.donation_types.map((donation) => (
+                <div
+                  key={donation.id}
+                  className={`border h-[150px] p-4 rounded-lg shadow-sm flex flex-col justify-center gap-8 ${
+                    addedDonations.includes(donation.id) ? 'bg-main text-white' : ''
+                  }`} // Change background and text color if added
+                >
+                  <div>
+                    <h4 className="text-lg font-semibold">
+                      {donation.type}
+                    </h4>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <p className="text-lg font-semibold">
+                      ₹{donation.price}
+                    </p>
+                    {addedDonations.includes(donation.id) ? (
+                      // If the donation is added, show the delete icon
+                      <div
+                        className="flex items-center cursor-pointer"
+                        onClick={() => handleRemoveDonation(donation.id)}
+                      >
+                        <FaTrash className="text-white" />
+                      </div>
+                    ) : (
+                      // Show "Add Donation" button if not added
+                      <div
+                        className="bg-main rounded-lg px-6 py-2 text-white font-bold text-md flex justify-center items-center cursor-pointer"
+                        onClick={() => handleAddDonation({
+                          id: donation.id,
+                          title: donation.type,
+                          price: donation.price,
+                        })}
+                      >
+                        Add Donation
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
       </div>
       <div>
         <Footer />
