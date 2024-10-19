@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 export default function PaymentSystem() {
   const searchParams = useSearchParams();
@@ -103,6 +104,7 @@ export default function PaymentSystem() {
   };
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">
         Razorpay Payment Gateway Integration
@@ -156,5 +158,6 @@ export default function PaymentSystem() {
         </button>
       </form>
     </div>
+    </Suspense>
   );
 }
