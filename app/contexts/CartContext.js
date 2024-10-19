@@ -42,6 +42,10 @@ export const CartProvider = ({ children }) => {
       localStorage.setItem('cartItems', JSON.stringify([])); // Update local storage
     }
   };
+  const clearCart = () => {
+    setCartItems([]); // Clear cart in state
+    localStorage.setItem("cart", JSON.stringify([])); // Clear local storage as well
+  };
 
   const closeCart = () => {
     setCartVisible(false);
@@ -52,7 +56,7 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, removeAllFromCart, closeCart, cartVisible }}>
+    <CartContext.Provider value={{ cartItems, addToCart,clearCart, removeFromCart, removeAllFromCart, closeCart, cartVisible }}>
       {children}
     </CartContext.Provider>
   );

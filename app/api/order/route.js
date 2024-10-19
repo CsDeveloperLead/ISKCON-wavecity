@@ -99,6 +99,7 @@ export async function POST(req) {
       amount: order.amount,
       currency: order.currency,
       receipt: order.receipt,
+      date : new Date().toISOString(),
       status: "created",
     };
 

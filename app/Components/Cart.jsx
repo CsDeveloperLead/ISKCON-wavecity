@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useCart } from "../contexts/CartContext";
+import Link from "next/link";
 
 const CartModal = () => {
-  const { cartItems} = useCart();
+  const { cartItems } = useCart();
   const [totalCount, setTotalCount] = useState(0); // Local state for total count
   const [groupedItemsArray, setGroupedItemsArray] = useState([]); // Local state for grouped items
+  const [totalAmount, setTotalAmount] = useState(0); // State for total amount
 
   useEffect(() => {
     // Count total items in the cart
@@ -21,8 +23,15 @@ const CartModal = () => {
       }
       return acc;
     }, {});
-    
+
     setGroupedItemsArray(Object.values(groupedItems)); // Convert to array for rendering
+
+    // Calculate total amount
+    const total = cartItems.reduce(
+      (acc, item) => acc + (Number(item.price) || 0),
+      0
+    );
+    setTotalAmount(total); // Set total amount in state
   }, [cartItems]); // Dependency array to re-run when cartItems change
 
   return (
@@ -32,11 +41,8 @@ const CartModal = () => {
       }`}
     >
       <div className="w-full px-20">
-        <div className="flex justify-between items-center">
-          {/* <h2 className="text-lg font-bold">Your Cart</h2> */}
-        </div>
+        <div className="flex justify-between items-center"></div>
 
-        {/* Cart Items */}
         {totalCount > 0 ? (
           <ul className="mt-4">
             <li className="flex justify-between items-center mb-2">
@@ -45,7 +51,7 @@ const CartModal = () => {
                   Donating For
                 </span>
                 <span>
-                  {groupedItemsArray[0].title}{" "}
+                  {groupedItemsArray.length > 0 && groupedItemsArray[0].title}{" "}
                   {totalCount > 1 && `+ ${totalCount - 1} more`}
                 </span>
               </span>
@@ -54,14 +60,20 @@ const CartModal = () => {
                   <span className="font-semibold text-gray-600">
                     Total Amount: ₹
                     <span className="text-lg text-main font-bold">
-                      {" "}
-                      {cartItems.reduce((acc, item) => acc + item.price, 0)}
+                      {totalAmount}
                     </span>
                   </span>
                 </div>
-                <div className="text-white bg-main rounded-lg w-[150px] py-3 flex justify-center items-center cursor-pointer">
-                  Pay Now
-                </div>
+                <Link
+                  href={{
+                    pathname: "/payment",
+                    query: { amount: totalAmount }, // Pass totalAmount as a query parameter under the key 'amount'
+                  }}
+                >
+                  <div className="text-white bg-main rounded-lg w-[150px] py-3 flex justify-center items-center cursor-pointer">
+                    Pay Now
+                  </div>
+                </Link>
               </span>
             </li>
           </ul>
