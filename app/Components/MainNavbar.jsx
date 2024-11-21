@@ -189,7 +189,7 @@ const handleLinkClick = (link) => {
             </svg>
            
             <div className="text-xl text-main font-bold flex flex-col">
-              <h1>Iskcon</h1>
+              <h1>ISKCON</h1>
               <h1>WAVECITY</h1>
             </div>
           </div>
