@@ -38,19 +38,38 @@ const PaymentSuccessComponent = () => {
   const searchParams = useSearchParams();
   const order_id = searchParams.get("order_id"); // Get the order_id from query params
   const [orderDetails, setOrderDetails] = useState(null);
-
   useEffect(() => {
     if (order_id) {
-      // Find the order that matches the order_id
-      const matchedOrder = orders.find((order) => order.order_id === order_id);
-      if (matchedOrder) {
-        setOrderDetails(matchedOrder); // Set the order details if found
+      // Check if the page has already reloaded once
+      const hasReloaded = localStorage.getItem("reloadOnce");
+  
+      if (!hasReloaded) {
+        // Find the order that matches the order_id
+        const matchedOrder = orders.find((order) => order.order_id === order_id);
+  
+        if (matchedOrder) {
+          setOrderDetails(matchedOrder); // Set the order details if found
+        } else {
+          // Clear cart items first
+          localStorage.removeItem("cartItems");
+          console.log("Cart cleared");
+  
+          // Set a flag to prevent multiple reloads
+          localStorage.setItem("reloadOnce", "true");
+  
+          // Delay reload to ensure cart items are cleared first
+          setTimeout(() => {
+            window.location.reload();
+          }, 100); // Adjust the delay if needed
+        }
       } else {
-        window.location.reload();
-        console.error("Order not found for ID:", order_id);
+        // Remove the flag after reload
+        localStorage.removeItem("reloadOnce");
       }
     }
-  }, [order_id]); // Add order_id to the dependency array
+  }, [order_id]);
+  
+   // Add order_id to the dependency array
 
   console.log("Order ID: ", order_id);
 
@@ -81,9 +100,9 @@ const PaymentSuccessComponent = () => {
 
     // Company or Receipt Header
     doc.setFont("helvetica", "bold");
-    doc.text("Isckon Wavecity, Ghaziabad", 20, 40);
+    doc.text("Iskcon Wavecity, Ghaziabad", 20, 40);
     doc.setFont("helvetica", "normal");
-    doc.text("isckonwavecity@gmail.com", 20, 45);
+    doc.text("Iskconwavecity@gmail.com", 20, 45);
     doc.text("Date: " + formatDate(orderDetails.date), 160, 45, { align: "right" });
 
     // Order and customer details box
@@ -115,7 +134,7 @@ const PaymentSuccessComponent = () => {
     doc.text("Thank you for your Generous Donations!", 105, 190, { align: "center" });
 
     // Save the PDF with a styled file name
-    doc.save(`ISCKON_Wavecity_${orderDetails.order_id}.pdf`);
+    doc.save(`Iskcon_Wavecity_${orderDetails.order_id}.pdf`);
 };
 
 

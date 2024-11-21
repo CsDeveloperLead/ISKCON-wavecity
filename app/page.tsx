@@ -23,10 +23,10 @@ export default function Home() {
           <MainNavbar />
           <div className="w-full h-[500px] py-2">
             <Image
-              src="/images/ceremony.jpg"
+              src="/images/hero.png"
               alt="hero"
-              width={1000}
-              height={1000}
+              width={3000}
+              height={3000}
               className="w-full h-full rounded-3xl"
             />
           </div>

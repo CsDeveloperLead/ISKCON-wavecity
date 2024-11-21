@@ -57,12 +57,12 @@ const Footer = () => {
               />
             </svg>
             <div className="text-xl text-main font-bold flex flex-col">
-              <h1>ISCKON</h1>
+              <h1>Iskcon</h1>
               <h1>WAVECITY</h1>
             </div>
           </div>
           <p className="text-sm text-gray-600 font-semibold">
-            ISCKON Wavecity R-11/35, Hare Krishna Marg, Sector 11, Raj Nagar,
+            Iskcon Wavecity R-11/35, Hare Krishna Marg, Sector 11, Raj Nagar,
             Ghaziabad Uttar Pradesh 201002, India
           </p>
 

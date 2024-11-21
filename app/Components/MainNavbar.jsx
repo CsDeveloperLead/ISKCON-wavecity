@@ -189,7 +189,7 @@ const handleLinkClick = (link) => {
             </svg>
            
             <div className="text-xl text-main font-bold flex flex-col">
-              <h1>ISCKON</h1>
+              <h1>Iskcon</h1>
               <h1>WAVECITY</h1>
             </div>
           </div>
@@ -399,7 +399,7 @@ const handleLinkClick = (link) => {
                     </span>
                   </Link>
                  
-                  <Link href="/isckon" className="group" onClick={() => handleLinkClick('/isckon')}>
+                  <Link href="/Iskcon" className="group" onClick={() => handleLinkClick('/Iskcon')}>
                     <span className="text-gray-600 text-lg font-bold px-9  group-hover:px-9 group-hover:text-white group-hover:bg-main group-hover:py-3.5 hover:rounded-full hover:px-6 transition-transform duration-3000 ">
                       ISKCON
                     </span>

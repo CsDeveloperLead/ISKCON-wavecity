@@ -55,7 +55,7 @@ export default function PaymentSystem() {
         key: "rzp_test_zqg3xz1NG64BqS", // Test key
         amount: order.amount,
         currency: order.currency,
-        name: "ISCKON Wavcity",
+        name: "Iskcon Wavcity",
         description: "Test Transaction",
         order_id: order.id, // This is the order_id created in the backend
         callback_url: "/api/verify", // Your success URL
