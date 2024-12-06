@@ -427,10 +427,10 @@ const handleLinkClick = (link) => {
                       Services
                     </span>
                   </Link>
-                  <Link href="/media" className="group" onClick={() => handleLinkClick('/media')}>
+                  <Link href="/shop" className="group" onClick={() => handleLinkClick('/media')}>
                     <span className="text-gray-600 text-lg font-bold px-9 group-hover:px-9 group-hover:text-white group-hover:bg-main group-hover:py-3.5 hover:rounded-full hover:px-6 transition-transform duration-3000 ">
                       {" "}
-                      Media
+                      Shop
                     </span>
                   </Link>
 
