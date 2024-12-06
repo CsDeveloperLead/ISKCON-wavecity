@@ -10,12 +10,12 @@ const Page = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(""); // State to track selected category
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // New state for search term
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const productsPerPage = 8; // Show 8 products per page
+  const productsPerPage = 8;
   const { addToCart } = useCart();
-
 
   // Fetch products from the backend
   useEffect(() => {
@@ -23,11 +23,10 @@ const Page = () => {
       .then((response) => {
         const data = response.data.data;
         setProducts(data);
-        setFilteredProducts(data); // Initially, no filter
+        setFilteredProducts(data);
 
-        // Extract unique categories from the products
         const uniqueCategories = [
-          ...new Set(data.map((product) => product.category)), // Assuming each product has a 'category' field
+          ...new Set(data.map((product) => product.category)),
         ];
         setCategories(uniqueCategories);
       })
@@ -36,19 +35,28 @@ const Page = () => {
     setLoading(false);
   }, []);
 
-  // Filter products based on category
-  const handleCategoryFilter = (category) => {
-    setSelectedCategory(category); // Set selected category
-    if (category === "") {
-      setFilteredProducts(products); // Show all products if no category filter is selected
-    } else {
-      const filtered = products.filter((product) =>
-        product.category.toLowerCase().includes(category.toLowerCase())
+  // Filter products based on search term and category
+  useEffect(() => {
+    let filtered = products;
+
+    if (selectedCategory) {
+      filtered = filtered.filter((product) =>
+        product.category.toLowerCase().includes(selectedCategory.toLowerCase())
       );
-      setFilteredProducts(filtered);
     }
-    setCurrentPage(1); // Reset to first page when filter is applied
-  };
+
+    if (searchTerm) {
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    setFilteredProducts(filtered);
+    setCurrentPage(1); // Reset to the first page when filters change
+  }, [selectedCategory, searchTerm, products]);
+
+  const handleCategoryFilter = (category) => setSelectedCategory(category);
+  const handleSearch = (event) => setSearchTerm(event.target.value);
 
   // Pagination logic
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -59,21 +67,26 @@ const Page = () => {
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const handleAddToCart = (product) => {
-    addToCart(product);
-  };
+  const handleAddToCart = (product) => addToCart(product);
 
   return (
     <div>
       <div className="mx-28 relative h-full">
         <MainNavbar />
-        {/* <div>
-          <HexLoader />
-        </div> */}
+
+        {/* Search Bar */}
+        <div className="w-full flex justify-center mt-4 mb-8">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearch}
+            placeholder="Search products..."
+            className="w-1/2 px-4 py-2 border rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-main"
+          />
+        </div>
 
         {/* Dynamic Category Filter Buttons */}
-        <div className="w-full flex justify-center space-x-6">
+        <div className="w-full flex justify-center space-x-6 mt-6">
           <button
             onClick={() => handleCategoryFilter("")}
             className={`${
@@ -102,9 +115,7 @@ const Page = () => {
         {/* Display Products */}
         {loading ? (
           <div className="flex justify-center items-center h-[400px]">
-            <div>
-              <HexLoader />
-            </div>
+            <HexLoader />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 my-20">
@@ -112,9 +123,8 @@ const Page = () => {
               <div key={product._id} className="flex flex-col items-center">
                 <div className="w-[300px] h-auto bg-white rounded-md shadow-lg">
                   <div className="w-full h-[200px] bg-gray-200 mb-4">
-                    {/* Image Display */}
                     <img
-                      src={product.Image} // Assuming Image is the key for product images
+                      src={product.Image}
                       alt={product.name}
                       className="w-full h-full object-cover"
                     />
@@ -122,16 +132,22 @@ const Page = () => {
                   <h3 className="text-md text-center text-gray-600 font-bold mb-2">
                     {product.name}
                   </h3>
-                  <div className="w-[90%] px-4 flex flex-col items-center  font-bold">
-                    {/* <span>Quantity : {product.quantity}</span> */}
-                    <span className="text-gray-600 flex">Price : <p className="text-main">₹{product.price}</p></span>
+                  <div className="w-[90%] px-4 flex flex-col items-center font-bold">
+                    <span className="text-gray-600 flex">
+                      Price: <p className="text-main">₹{product.price}</p>
+                    </span>
                   </div>
                   <div className="w-full flex justify-center">
-                    <button className="bg-main text-white text-sm font-semibold w-[90%] py-2 rounded-md my-4"  onClick={() => handleAddToCart({
+                    <button
+                      className="bg-main text-white text-sm font-semibold w-[90%] py-2 rounded-md my-4"
+                      onClick={() =>
+                        handleAddToCart({
                           id: product.id,
                           title: product.name,
                           price: product.price,
-                        })}>
+                        })
+                      }
+                    >
                       Add to Cart
                     </button>
                   </div>
@@ -140,6 +156,7 @@ const Page = () => {
             ))}
           </div>
         )}
+
         {/* Pagination Controls */}
         <div className="pagination flex justify-center mt-6 space-x-4 my-6">
           <button

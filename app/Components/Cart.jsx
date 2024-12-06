@@ -54,6 +54,7 @@ const CartModal = () => {
                   {groupedItemsArray.length > 0 && groupedItemsArray[0].title}{" "}
                   {totalCount > 1 && `+ ${totalCount - 1} more`}
                 </span>
+                <span className="bg-main text-white py-1 w-[150px] rounded-md my-4 flex justify-center items-center cursor-pointer" onClick={() => {localStorage.removeItem("cartItems"); window.location.reload();}}>Clear Cart</span>
               </span>
               <span className="flex items-center gap-10">
                 <div className="flex flex-col items-start gap-2">
