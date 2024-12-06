@@ -78,7 +78,7 @@ const Page = () => {
             onClick={() => handleCategoryFilter("")}
             className={`${
               selectedCategory === ""
-                ? "bg-main shadow-[0_1px_5px_rgba(0,0,0,0.5)] "
+                ? "bg-main text-white shadow-[0_1px_5px_rgba(0,0,0,0.5)] "
                 : "bg-white text-black shadow-[0_1px_5px_rgba(0,0,0,0.5)]"
             }  px-4 py-2 rounded-full`}
           >
@@ -90,7 +90,7 @@ const Page = () => {
               onClick={() => handleCategoryFilter(category)}
               className={`${
                 selectedCategory === category
-                  ? "bg-main shadow-[0_1px_5px_rgba(0,0,0,0.5)]  "
+                  ? "bg-main text-white shadow-[0_1px_5px_rgba(0,0,0,0.5)]  "
                   : "bg-white text-black shadow-[0_1px_5px_rgba(0,0,0,0.5)]  "
               }  px-4 py-2 rounded-full `}
             >
