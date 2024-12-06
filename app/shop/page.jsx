@@ -19,7 +19,7 @@ const Page = () => {
 
   // Fetch products from the backend
   useEffect(() => {
-    Axios.get("http://localhost:8000/api/v1/products")
+    Axios.get("https://isckon-backend.vercel.app/api/v1/products")
       .then((response) => {
         const data = response.data.data;
         setProducts(data);
