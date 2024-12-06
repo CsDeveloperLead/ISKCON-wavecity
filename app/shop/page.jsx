@@ -80,7 +80,7 @@ const Page = () => {
               selectedCategory === ""
                 ? "bg-main shadow-[0_1px_5px_rgba(0,0,0,0.5)] "
                 : "bg-white text-black shadow-[0_1px_5px_rgba(0,0,0,0.5)]"
-            } text-white px-4 py-2 rounded-full`}
+            }  px-4 py-2 rounded-full`}
           >
             All Categories
           </button>
@@ -92,7 +92,7 @@ const Page = () => {
                 selectedCategory === category
                   ? "bg-main shadow-[0_1px_5px_rgba(0,0,0,0.5)]  "
                   : "bg-white text-black shadow-[0_1px_5px_rgba(0,0,0,0.5)]  "
-              } text-white px-4 py-2 rounded-full `}
+              }  px-4 py-2 rounded-full `}
             >
               {category}
             </button>
