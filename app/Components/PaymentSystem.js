@@ -27,14 +27,11 @@ export default function PaymentSystem() {
   }, [queryAmount]);
 
   const payNow = async () => {
-    if (!amount || !name || !email) {
+    if (!amount || !name || !email){
       return alert("Please fill all the details");
-    }
-  
+    } 
+
     try {
-      // Retrieve cart items from localStorage
-      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  
       // Create order by calling the server endpoint
       const response = await fetch("/api/order", {
         method: "POST",
@@ -45,27 +42,25 @@ export default function PaymentSystem() {
           amount,
           currency: "INR",
           receipt: "receipt#1",
-          user: name, // Send name as 'user'
-          email,
-          notes: {
-            cartItems, // Include cart items in the order notes
-          },
+          user: name,  // Send name as 'user'
+          email, 
+          notes: {},
         }),
       });
-  
+
       const order = await response.json();
-  
+
       // Open Razorpay Checkout
       const options = {
         key: "rzp_test_zqg3xz1NG64BqS", // Test key
         amount: order.amount,
         currency: order.currency,
-        name: "Iskcon Wavecity",
+        name: "Iskcon Wavcity",
         description: "Test Transaction",
         order_id: order.id, // This is the order_id created in the backend
         callback_url: "/api/verify", // Your success URL
         prefill: {
-          name, // User's name
+          name,  // User's name
           email, // User's email
           contact: "9999999999",
         },
@@ -99,7 +94,7 @@ export default function PaymentSystem() {
             });
         },
       };
-  
+
       const rzp = new window.Razorpay(options);
       rzp.open();
     } catch (error) {
@@ -107,7 +102,6 @@ export default function PaymentSystem() {
       alert("Error creating order");
     }
   };
-  
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
