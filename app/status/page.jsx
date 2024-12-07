@@ -37,7 +37,7 @@ const PaymentSuccessComponent = () => {
   const order_id = searchParams.get("order_id"); // Get the order_id from query params
   const [orderDetails, setOrderDetails] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const [showCart, setShowCart] = useState(false); // Control cart visibility
+  const [showCart] = useState(false); // Control cart visibility
 
   // Fetch cart items from localStorage on component mount
   useEffect(() => {

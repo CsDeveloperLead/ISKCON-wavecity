@@ -1,7 +1,6 @@
 "use client";
 
-import Footer from "@/app/Components/Footer";
-import { Main } from "next/document";
+import Footer from "../../Components/Footer";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import MainNavbar from "../../Components/MainNavbar";
