@@ -4,7 +4,7 @@ import Axios from "axios";
 import MainNavbar from "../Components/MainNavbar";
 import Footer from "../Components/Footer";
 import HexLoader from "../Components/HexLoader";
-import { useCart } from "../contexts/CartContext";
+import Link from "next/link";
 
 const Page = () => {
   const [products, setProducts] = useState([]);
@@ -14,8 +14,9 @@ const Page = () => {
   const [searchTerm, setSearchTerm] = useState(""); // New state for search term
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+
   const productsPerPage = 8;
-  const { addToCart } = useCart();
+  // const { addToCart } = useCart();
 
   // Fetch products from the backend
   useEffect(() => {
@@ -67,7 +68,7 @@ const Page = () => {
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const handleAddToCart = (product) => addToCart(product);
+  // const handleAddToCart = (product) => addToCart(product);
 
   return (
     <div>
@@ -138,18 +139,14 @@ const Page = () => {
                     </span>
                   </div>
                   <div className="w-full flex justify-center">
-                    <button
-                      className="bg-main text-white text-sm font-semibold w-[90%] py-2 rounded-md my-4"
-                      onClick={() =>
-                        handleAddToCart({
-                          id: product.id,
-                          title: product.name,
-                          price: product.price,
-                        })
-                      }
+                    <Link
+                      href={`/productPage/${product._id}`}
+                      className=" w-[90%]"
                     >
-                      Add to Cart
-                    </button>
+                      <button className="bg-main text-white text-sm font-semibold py-2 w-full rounded-md my-4">
+                        See Product
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 "use client"; // Ensure this is a client component
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
@@ -7,48 +7,60 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
-    // Initialize state from local storage if available
-    if (typeof window !== 'undefined') { // Check if window is defined (browser context)
-      const savedCartItems = localStorage.getItem('cartItems');
+    if (typeof window !== "undefined") {
+      const savedCartItems = localStorage.getItem("cartItems");
       return savedCartItems ? JSON.parse(savedCartItems) : [];
     }
-    return []; // Default to an empty array if not in the browser
+    return [];
   });
 
   const [cartVisible, setCartVisible] = useState(false);
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
-      const updatedItems = [...prevItems, item];
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('cartItems', JSON.stringify(updatedItems)); // Save to local storage
+      const existingItemIndex = prevItems.findIndex((cartItem) => cartItem._id === item._id,
+
+    );
+  
+      let updatedItems;
+      if (existingItemIndex !== -1) {
+        // Update quantity if the item already exists in the cart
+        updatedItems = prevItems.map((cartItem) =>
+          cartItem._id === item._id
+            ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+            : cartItem
+        );
+      } else {
+        // Add new item to the cart
+        updatedItems = [...prevItems, item];
+      }
+  
+      // Update local storage
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      }
+  
+      return updatedItems;
+    });
+  };
+  
+  
+
+  const removeFromCart = (itemId) => {
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.filter((item) => item._id !== itemId); // Use _id instead of id
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cartItems", JSON.stringify(updatedItems));
       }
       return updatedItems;
     });
   };
 
-  const removeFromCart = (donationId) => {
-    setCartItems((prevItems) => {
-      const updatedItems = prevItems.filter((item) => item.id !== donationId); // Filter out the item with the matching ID
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('cartItems', JSON.stringify(updatedItems)); // Update local storage
-      }
-      return updatedItems; // Return the updated items
-    });
-  };
-  const removeAllFromCart = () => {
-    setCartItems([]); // Clear the cart items
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('cartItems', JSON.stringify([])); // Update local storage
-    }
-  };
   const clearCart = () => {
-    setCartItems([]); // Clear cart in state
-    localStorage.setItem("cart", JSON.stringify([])); // Clear local storage as well
-  };
-
-  const closeCart = () => {
-    setCartVisible(false);
+    setCartItems([]);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cartItems", JSON.stringify([]));
+    }
   };
 
   useEffect(() => {
@@ -56,7 +68,7 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart,clearCart, removeFromCart, removeAllFromCart, closeCart, cartVisible }}>
+    <CartContext.Provider value={{ cartItems, addToCart, clearCart, removeFromCart, cartVisible }}>
       {children}
     </CartContext.Provider>
   );

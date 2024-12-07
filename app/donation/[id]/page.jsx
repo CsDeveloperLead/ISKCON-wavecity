@@ -1,7 +1,7 @@
 "use client";
 
 // import Link from "next/link";
-import { useState} from "react";
+import { useState } from "react";
 import { useParams } from "next/navigation";
 import React from "react";
 import Image from "next/image";
@@ -9,7 +9,7 @@ import MainNavbar from "../../Components/MainNavbar";
 
 import Footer from "../../Components/Footer";
 import { useCart } from "../../contexts/CartContext";
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash } from "react-icons/fa";
 
 const data = [
   {
@@ -39,7 +39,7 @@ const data = [
           { id: 13, type: "1000 Bricks", price: 7000 },
           { id: 14, type: "2 Sq. Feet Area", price: 19999 },
         ],
-      }
+      },
     ],
   },
   {
@@ -332,10 +332,10 @@ const CardDetails = () => {
     return <div>Card not found</div>;
   }
 
-
   const handleAddDonation = (donation) => {
+    console.log("Donation being added:", donation);
     addToCart(donation);
-    setAddedDonations((prev) => [...prev, donation.id]); // Add the donation ID to the state
+    setAddedDonations((prev) => [...prev, donation._id]);
   };
 
   const handleRemoveDonation = (donationId) => {
@@ -440,59 +440,64 @@ const CardDetails = () => {
         </div>
       </div>
       <div>
-      <div className="mx-28 py-6">
-      <div className="grid gap-10">
-        {card.services.map((service, serviceIndex) => (
-          <div key={serviceIndex}>
-            <h3 className="text-3xl font-bold text-[#204289] my-8">
-              {service.service_name}
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {service.donation_types.map((donation) => (
-                <div
-                  key={donation.id}
-                  className={`border h-[150px] p-4 rounded-lg shadow-sm flex flex-col justify-center gap-8 ${
-                    addedDonations.includes(donation.id) ? 'bg-main text-white' : ''
-                  }`} // Change background and text color if added
-                >
-                  <div>
-                    <h4 className="text-lg font-semibold">
-                      {donation.type}
-                    </h4>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <p className="text-lg font-semibold">
-                      ₹{donation.price}
-                    </p>
-                    {addedDonations.includes(donation.id) ? (
-                      // If the donation is added, show the delete icon
-                      <div
-                        className="flex items-center cursor-pointer"
-                        onClick={() => handleRemoveDonation(donation.id)}
-                      >
-                        <FaTrash className="text-white" />
+        <div className="mx-28 py-6">
+          <div className="grid gap-10">
+            {card.services.map((service, serviceIndex) => (
+              <div key={serviceIndex}>
+                <h3 className="text-3xl font-bold text-[#204289] my-8">
+                  {service.service_name}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {service.donation_types.map((donation) => (
+                    <div
+                      key={donation.id}
+                      className={`border h-[150px] p-4 rounded-lg shadow-sm flex flex-col justify-center gap-8 ${
+                        addedDonations.includes(donation.id)
+                          ? "bg-main text-white"
+                          : ""
+                      }`} // Change background and text color if added
+                    >
+                      <div>
+                        <h4 className="text-lg font-semibold">
+                          {donation.type}
+                        </h4>
                       </div>
-                    ) : (
-                      // Show "Add Donation" button if not added
-                      <div
-                        className="bg-main rounded-lg px-6 py-2 text-white font-bold text-md flex justify-center items-center cursor-pointer"
-                        onClick={() => handleAddDonation({
-                          id: donation.id,
-                          title: donation.type,
-                          price: donation.price,
-                        })}
-                      >
-                        Add Donation
+                      <div className="flex justify-between items-center">
+                        <p className="text-lg font-semibold">
+                          ₹{donation.price}
+                        </p>
+                        {addedDonations.includes(donation.id) ? (
+                          // If the donation is added, show the delete icon
+                          <div
+                            className="flex items-center cursor-pointer"
+                            onClick={() => handleRemoveDonation(donation.id)}
+                          >
+                            <FaTrash className="text-white" />
+                          </div>
+                        ) : (
+                          // Show "Add Donation" button if not added
+                          <div
+                            className="bg-main rounded-lg px-6 py-2 text-white font-bold text-md flex justify-center items-center cursor-pointer"
+                            onClick={() =>
+                              handleAddDonation({
+                                _id: donation.id,
+                                name: donation.type,
+                                price: donation.price,
+                                quantity: 1, // Add default quantity
+                              })
+                            }
+                          >
+                            Add Donation
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
       </div>
       <div>
         <Footer />
